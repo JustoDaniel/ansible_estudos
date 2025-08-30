@@ -1,0 +1,22 @@
+#!/root/ansible/myansible/bin/ansible-playbook
+- name: Iniciar instancias EC2 na AWS
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Coletar informacoes das instancias paradas
+      amazon.aws.ec2_instance_info:
+        region: us-east-2
+        filters:
+          "instance-state-name": stopped
+          "tag:Environment": dev
+      register: stopped_instances
+
+    - name: Iniciar as instancias
+      amazon.aws.ec2_instance:
+        region: us-east-2
+        instance_ids: "{{ item.instance_id }}"
+        state: running
+      loop: "{{ stopped_instances.instances }}"
+      when: stopped_instances.instances | length > 0

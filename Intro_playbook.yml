@@ -1,0 +1,15 @@
+#!/root/ansible/myansible/bin/ansible-playbook
+- name: Introduction Ansible Playbook
+  hosts: all
+  remote_user: ec2-user
+  become: 'yes'
+  become_user: root
+
+  tasks:
+    - name: Checking connection via Ping
+      ping:
+    
+    - name: Unistall Apache WebServer
+      yum:
+        name: httpd
+        state: absent

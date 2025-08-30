@@ -1,0 +1,22 @@
+#!/root/ansible/myansible/bin/ansible-playbook
+- name: Desligar instancias EC2 na AWS
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Coletar informacoes das instancias em execucao
+      amazon.aws.ec2_instance_info:
+        region: sua_regiao_aws
+        filters:
+          "instance-state-name": running
+          "tag:Environment": dev
+      register: running_instances
+
+    - name: Parar as instancias
+      amazon.aws.ec2_instance:
+        region: sua_regiao_aws
+        instance_ids: "{{ item.instance_id }}"
+        state: stopped
+      loop: "{{ running_instances.instances }}"
+      when: running_instances.instances | length > 0
