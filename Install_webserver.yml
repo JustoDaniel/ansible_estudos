@@ -1,0 +1,17 @@
+#!/root/ansible/myansible/bin/ansible-playbook
+- name: Instalando WebServer
+  host: all
+  remote_user: ec2-user
+  become: 'yes'
+  become_user: root
+
+  task:
+    - name: Verifique que o Apache esta na última versão
+      yum: 
+        name: http
+        state: latest
+    - name: Verifica que o Apache esta rodando
+      service:
+        yum: http
+        state: started
+
