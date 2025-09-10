@@ -1,3 +1,4 @@
+#!/root/ansible/myansible/bin/ansible-playbook
 ---
 - name: Example playbook for manual Maintenance
   hosts: all
@@ -52,4 +53,4 @@
         msg: "Apache is {{ http_status.state }} and enabled."
 
   tags: scenario2
-  
+
