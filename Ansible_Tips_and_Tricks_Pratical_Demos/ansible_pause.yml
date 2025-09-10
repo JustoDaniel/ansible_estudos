@@ -54,3 +54,29 @@
 
   tags: scenario2
 
+- name: Install and Start Apache HTTP Server on Ubuntu 
+  hosts: all
+  become: yes
+  tasks:
+    - name : Pause for 30 seconds
+      pause:
+        seconds: 30
+      
+    - name: Pause for user confirmation
+      pause:
+        prompt: "Press 'Enter' to continue after verifying the backup"
+
+    - name: Pause for UserName input
+      pause:
+        prompt: "Enter your username"
+        echo: yes 
+
+    - name: Pause for UPassword input
+      pause:
+        prompt: "Enter your username"
+        echo: no  
+
+  tags: scenario3
+
+
+      
