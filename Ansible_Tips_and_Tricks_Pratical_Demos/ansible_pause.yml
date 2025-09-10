@@ -1,0 +1,55 @@
+---
+- name: Example playbook for manual Maintenance
+  hosts: all
+  become: yes # Usar sudo para executar tarefas com privilégios elevados
+
+  tasks:
+    - name: Notify about Maintenance
+      debug:
+        msg: "Janela de Manutenção: Please perform the required checks"
+  
+    - name: Pause for Maintenance
+      pause:
+        promt: "Press 'Enter' to continue after Maintenance is completed"
+
+    - name: Resume operations post-Maintenance
+      shell: echo "Maintenance completed, resumin operations"
+
+  tags: scenario1
+
+
+- name: Install And Start Apache HTTP Server on Ubuntu
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update apt package index
+      apt:
+        update_cache: yes
+
+    - name: Install Apache HTTP Server
+      apt:
+        name: apache2
+        state: present
+
+    - name: Start and enable Apache service
+      systemd:
+        name: apache2
+        state: started
+        enabled: yes
+
+    - name: Pause to allow the web service to Start
+      pause: 
+        seconds: 30
+
+    - name: Ensure Apache is running
+      systemd:
+        name: apache2
+        state: started
+      register: http_status
+
+    - name: Display Apache http_status
+      debug:
+        msg: "Apache is {{ http_status.state }} and enabled."
+
+  tags: scenario2
+  
