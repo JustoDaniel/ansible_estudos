@@ -14,3 +14,5 @@ ansible-vault edit filname
 #Rekey a file (change password)
 ansible-vault rekey filename
  -->
+
+ ![alt text](image.png)
