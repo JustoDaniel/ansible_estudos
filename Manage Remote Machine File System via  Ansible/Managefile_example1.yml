@@ -26,9 +26,33 @@
         msg: "Text file created successfully"
       when: result_text_file.changed
 
-    - name: Verificar se o Arquivo Exist
+    - name: Verificar se o Arquivo Existe
       ansible.builtin.file:
         path: /tmp/empty_file.txt
       register: file_stat
 
+    - debug:
+        msg: "O Texto existe"
+      when: file_stat.stat.exists
+
+    - name: Mudança de permissão do arquivo
+      ansible.builtin.file:
+        path: /tmp/text_file.txt
+        mode: '0600'
+      register: result_change_permission
+
+    - debug:
+        msg: "file permission change successfully"
+      when: result_change_permission.changed
+
+    - name: Delete o arquivo se ele existe"
+      ansible.builtin.file:
+        path: /tmp/unwanted_file.txt
+        state: absent
+      register: result_delete_file
+
+    - debug:
+        msg: "Arquivo deletado com sucesso"
+        when: result_delete_file.changed
+        
 
