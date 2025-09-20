@@ -14,11 +14,9 @@
       when: result_empty_file.changed
 
     - name: Cria um arquivo de texto
-      ansible.builtin.file:
-        path: /tmp/text_file.txt
-        state: touch
-        mode: '0644'
+      ansible.builtin.copy:
         content: Aqui é o que esta escrito dentro do arquivo.
+        dest: /tmp/text_file.txt
       register: result_text_file
 
     - debug:
