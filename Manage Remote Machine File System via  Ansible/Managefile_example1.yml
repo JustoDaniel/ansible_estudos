@@ -1,0 +1,34 @@
+---
+- name: File Managemente Playbook
+  hosts: webservers
+
+  tasks:
+    - name: Cria um arquivo vazio
+      ansible.builtin.file:
+      path: /tmp/empty_file.txt
+      state: touch
+      register: result_empty_file.changed
+
+    - debug:
+        msg: "Empty file create successfully"
+      when: result_empty_file.changed
+
+    - name: Cria um arquivo de texto
+      ansible.builtin.file:
+        path: /tmp/text_file.txt
+        state: touch
+        mode: '0644'
+        content: 
+          Aqui é o que esta escrito dentro do arquivo.
+      register: result_text_file
+
+    - debug:
+        msg: "Text file created successfully"
+      when: result_text_file.changed
+
+    - name: Verificar se o Arquivo Exist
+      ansible.builtin.file:
+        path: /tmp/empty_file.txt
+      register: file_stat
+
+
