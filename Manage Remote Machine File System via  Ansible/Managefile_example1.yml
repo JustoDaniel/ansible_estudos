@@ -52,6 +52,6 @@
 
     - debug:
         msg: "Arquivo deletado com sucesso"
-        when: result_delete_file.changed
+      when: result_delete_file.changed
 
 
