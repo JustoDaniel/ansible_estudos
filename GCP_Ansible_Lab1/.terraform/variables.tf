@@ -25,3 +25,9 @@ variable "machine_types" {
     windows_node = "e2-small"
   }
 }
+
+variable "GOOGLE_CREDENTIALS" {
+  type        = string
+  description = "Conteúdo JSON das credenciais do Google Cloud."
+  sensitive   = true # MUITO IMPORTANTE para não expor a credencial nos logs!
+}
