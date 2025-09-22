@@ -62,7 +62,7 @@ module "linux_nodes" {
 
 # Módulo para criar as 2 VMs Windows gerenciadas
 module "windows_nodes" {
-  source              = "./modules/instances/windows"
+  source              = "./modules/instances/win"
   count               = 2 # Cria 2 instâncias
   instance_name       = "windows-node-0${count.index + 1}"
   project_id          = var.project_id
