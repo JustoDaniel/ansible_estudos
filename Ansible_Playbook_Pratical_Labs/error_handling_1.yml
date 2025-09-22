@@ -1,0 +1,20 @@
+---
+- name: Trabalhando com erros parte 1
+  hosts: akk
+  remote_user: ec2-user
+  become: yes
+  become_user: root
+
+  tasks:
+    - name: Listar todos os arquivos e diretorios no /etc 
+      command: "Ls /etcc" # Comando errado
+      register: home_out
+      ignore_errors: yes
+    - debug: var=home_out
+
+    - name: Listar todos os arquivos e diretorios no /tmp location
+      command: "ls /tmp"
+      register: tmp_out
+    - debug: var=tmp_out
+
+    

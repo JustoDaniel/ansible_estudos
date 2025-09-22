@@ -1,0 +1,13 @@
+#!/root/ansible/myansible/bin/ansible-playbook
+# Gosto de testa e escrever sem ficar copiando
+---
+- name: Pass Variable to Playbook from Command Line
+  hosts: all
+  vars:
+    var1: value1
+    var2: value2
+
+  tasks:
+    - name: Print Variable
+      debug:
+        msg: "var1={{ var1 }}, var2={{ var2 }}"

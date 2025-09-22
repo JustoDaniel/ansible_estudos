@@ -1,0 +1,22 @@
+#!/root/ansible/myansible/bin/ansible-playbook
+- name: Instalando WebServer
+  hosts: all
+  remote_user: ec2-user
+  become: 'yes'
+  become_user: root
+
+  tasks:
+    - name: Verifique que o Apache esta na última versão
+      yum:
+        name: httpd
+        state: present
+      register: httpd_installation_status # Aqui este comando esta registrando o status da instalação que esta sendo verificada neste bloco
+
+    - name: Ensure Apache is Running
+      service:
+        name: httpd
+        state: started
+      when: httpd_installation_status.changed == True
+        # Esta parte do when esta verificando se o registro que fizemos na linha acima 
+        # é verdadeiro na linha 13, caso sim ele irá executar o bloco inteiro do comando
+
