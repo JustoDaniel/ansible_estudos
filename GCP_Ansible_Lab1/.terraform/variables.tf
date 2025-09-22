@@ -26,3 +26,8 @@ variable "machine_types" {
   }
 }
 
+variable "GOOGLE_CREDENTIALS" {
+  description = "Credenciais JSON da conta de serviço do Google Cloud."
+  type        = string
+  sensitive   = true // Muito importante para credenciais, para não exibi-las nos logs.
+}
