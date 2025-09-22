@@ -8,7 +8,7 @@ output "linux_nodes_ips" {
   value       = module.linux_nodes[*].public_ip
 }
 
-output "windows_nodes_ips" {
+/* output "windows_nodes_ips" {
   description = "Endereços IP públicos dos nós Windows."
   value       = module.windows_nodes[*].public_ip
 }
@@ -16,4 +16,4 @@ output "windows_nodes_ips" {
 output "instrucoes_windows" {
   description = "Instruções para obter a senha inicial do Windows."
   value       = "Para obter a senha de uma instância Windows, vá ao Console do GCP, selecione a VM, clique em 'Definir senha do Windows' e anote a senha gerada."
-}
+} */
