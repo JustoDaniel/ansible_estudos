@@ -60,7 +60,7 @@ module "linux_nodes" {
   tags                = ["allow-ssh"]
 }
 
-# Módulo para criar as 2 VMs Windows gerenciadas
+/* # Módulo para criar as 2 VMs Windows gerenciadas
 module "windows_nodes" {
   source              = "./modules/instances/win"
   count               = 2 # Cria 2 instâncias
@@ -72,3 +72,4 @@ module "windows_nodes" {
   service_account     = module.iam.service_account_email
   tags                = ["allow-rdp-winrm"]
 }
+ */
